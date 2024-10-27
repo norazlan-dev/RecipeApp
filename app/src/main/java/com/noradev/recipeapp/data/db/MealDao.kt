@@ -17,7 +17,7 @@ interface MealDao {
     fun getMealFromId(idMeal: Int): LiveData<Meal>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMeal(meal: Meal)
+    suspend fun insertMeal(meal: Meal): Long
 
     @Delete
     suspend fun delete(meal: Meal)

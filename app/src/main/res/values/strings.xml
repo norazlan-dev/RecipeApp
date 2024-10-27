@@ -6,4 +6,9 @@
     <string name="recipe">Recipe</string>
     <string name="ingredients">Ingredients</string>
     <string name="instructions">Instructions</string>
+    <string name="manually_add_recipe">Manually Add Recipe</string>
+    <string name="add_meal">Add Meal</string>
+    <string name="edit_meal">Edit Meal</string>
+    <string name="image_url">Image URL</string>
+    <string name="add_edit_meal">Add/Edit Meal</string>
 </resources>

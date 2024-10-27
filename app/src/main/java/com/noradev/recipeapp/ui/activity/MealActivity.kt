@@ -2,19 +2,17 @@ package com.noradev.recipeapp.ui.activity
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.noradev.recipeapp.data.db.AppDatabase
-import com.noradev.recipeapp.data.model.Meal
 import com.noradev.recipeapp.data.network.ApiService
 import com.noradev.recipeapp.data.repository.MealRepository
 import com.noradev.recipeapp.databinding.ActivityMealBinding
-import com.noradev.recipeapp.ui.adapter.MealAdapter
 import com.noradev.recipeapp.ui.utils.loadImageFromUrl
 import com.noradev.recipeapp.ui.viewmodel.MealViewModel
 import com.noradev.recipeapp.ui.viewmodel.MealViewModelFactory
@@ -47,7 +45,6 @@ class MealActivity : AppCompatActivity() {
         mealId = intent.getStringExtra(MEAL_ID).toString()
         mode = intent.getStringExtra(MODE).toString()
         setContentView(binding.root)
-        window.statusBarColor = Color.TRANSPARENT
 
         initNonView()
         initView()
@@ -118,8 +115,7 @@ class MealActivity : AppCompatActivity() {
     }
 
     private fun initGetMeal() {
-        mealViewModel.getMealFromId(mealId.toInt())
-        mealViewModel.meal?.observe(this) { meal ->
+        mealViewModel.getMealFromId(mealId.toInt()).observe(this) { meal ->
             if (meal != null) {
                 meal.strMealThumb?.let { binding.ivMeal.loadImageFromUrl(it) }
                 binding.tvHead.text = meal.strMeal
@@ -195,12 +191,28 @@ class MealActivity : AppCompatActivity() {
                 }
 
                 binding.fabDelete.setOnClickListener {
-                    finish()
-                    mealViewModel.deleteMeal()
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle(title)
+                        .setMessage("Delete This Recipe?")
+                        .setPositiveButton("Yes") { dialog, _ ->
+                            finish()
+                            mealViewModel.deleteMeal(meal)
+                            dialog.dismiss()
+                        }
+                        .setNegativeButton("No") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                    builder.create().show()
                 }
 
                 binding.fabEdit.setOnClickListener {
-                    // Handle submenu2 click
+                    startActivity(
+                        MealFieldActivity.newIntent(
+                            this@MealActivity,
+                            meal.idMeal.toString(),
+                            "edit"
+                        )
+                    )
                 }
             }
         }

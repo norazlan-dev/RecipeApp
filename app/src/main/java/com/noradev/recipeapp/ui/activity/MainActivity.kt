@@ -56,6 +56,16 @@ class MainActivity : AppCompatActivity() {
             binding.refresh.isRefreshing = false
         }
 
+        binding.fabAdd.setOnClickListener {
+            startActivity(
+                MealFieldActivity.newIntent(
+                    this@MainActivity,
+                    "0",
+                    "add"
+                )
+            )
+        }
+
         initList()
     }
 

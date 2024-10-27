@@ -41,6 +41,9 @@ class MealAdapter : RecyclerView.Adapter<MealAdapter.ViewHolder>(),
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bd.tvName.text = mealListFilter[position].strMeal
         mealListFilter[position].strMealThumb?.let { holder.bd.ivMeal.loadImageFromUrl(it) }
+        if (mealListFilter[position].strMealThumb.isNullOrBlank()) {
+            holder.bd.ivMeal.setImageDrawable(null)
+        }
 
         holder.itemView.setOnClickListener {
             this.onItemsClickListener.onItemClick(
