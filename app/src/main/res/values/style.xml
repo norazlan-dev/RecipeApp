@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ShapeAppearanceOverlay.BottomRadius" parent="">
+        <item name="cornerSizeBottomLeft">0%</item>
+        <item name="cornerSizeBottomRight">16%</item>
+        <item name="cornerSizeTopLeft">0%</item>
+        <item name="cornerSizeTopRight">0%</item>
+    </style>
+</resources>

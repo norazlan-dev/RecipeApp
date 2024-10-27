@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.MealActivity">
+
+    <ScrollView
+        android:id="@+id/svHead"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none" >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/placeholder_1"
+                android:scaleType="fitCenter"
+                android:background="#c7c7c7"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.BottomRadius"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivMeal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/placeholder"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.BottomRadius"/>
+
+            <TextView
+                android:id="@+id/tvHead"
+                android:layout_margin="@dimen/dp_16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivMeal"
+                android:textSize="@dimen/text_size_xxlarge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnBackground"
+                android:textStyle="bold"
+                android:text="Recipe"/>
+
+            <TextView
+                android:id="@+id/tvIngredientsHead"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvHead"
+                android:textSize="@dimen/text_size_large"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnBackground"
+                android:textStyle="bold"
+                android:text="Ingredients"/>
+
+            <TextView
+                android:id="@+id/tvIngredients"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvIngredientsHead"
+                android:textSize="@dimen/text_size_medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnBackground"
+                android:text="Ingredients"/>
+
+            <TextView
+                android:id="@+id/tvInstructionsHead"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvIngredients"
+                android:textSize="@dimen/text_size_large"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnBackground"
+                android:textStyle="bold"
+                android:text="Instructions"/>
+
+            <TextView
+                android:id="@+id/tvInstructions"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvInstructionsHead"
+                android:textSize="@dimen/text_size_medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnBackground"
+                android:text="Instructions"/>
+
+            <ImageView
+                android:id="@+id/ivVideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_ondemand_video_24"
+                app:tint="@color/red_800"
+                android:layout_margin="@dimen/dp_16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvInstructions" />
+
+            <ImageView
+                android:id="@+id/ivSite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_link_24"
+                app:tint="@color/blue_800"
+                android:layout_margin="@dimen/dp_16"
+                app:layout_constraintStart_toEndOf="@id/ivVideo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvInstructions" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:visibility="gone"
+        android:background="?android:colorBackground"
+        android:id="@+id/tvHiddenHead"
+        android:padding="@dimen/dp_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="@dimen/text_size_xxlarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/colorOnBackground"
+        android:textStyle="bold"
+        android:text="Recipe"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_edit_24"
+        android:contentDescription="@string/get_a_new_recipe_now"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/dp_16"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
