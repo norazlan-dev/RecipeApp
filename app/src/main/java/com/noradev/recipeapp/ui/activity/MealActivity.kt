@@ -25,6 +25,7 @@ class MealActivity : AppCompatActivity() {
     private lateinit var apiService: ApiService
     private lateinit var mealRepository: MealRepository
     private lateinit var mealViewModel: MealViewModel
+    private var isSubmenuOpen = false
     private var mealId: String = ""
     private var mode: String = ""
 
@@ -60,6 +61,63 @@ class MealActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        initGetMeal()
+
+        binding.fabMenu.setOnClickListener {
+            toggleSubmenu()
+        }
+
+        binding.svHead.viewTreeObserver.addOnScrollChangedListener {
+            checkImageViewVisibility()
+        }
+    }
+
+    private fun toggleSubmenu() {
+        val spacing = 8 * resources.displayMetrics.density
+
+        if (isSubmenuOpen) {
+            binding.fabDelete.animate()
+                .translationY(0f)
+                .alpha(0f)
+                .setDuration(200)
+                .withEndAction {
+                    binding.fabDelete.visibility = View.GONE
+                }
+
+            binding.fabEdit.animate()
+                .translationY(0f)
+                .alpha(0f)
+                .setDuration(200)
+                .withEndAction {
+                    binding.fabEdit.visibility = View.GONE
+                }
+        } else {
+            binding.fabDelete.apply {
+                visibility = View.VISIBLE
+                alpha = 0f
+                translationY = 0f
+                animate()
+                    .translationY(-150f - spacing)
+                    .alpha(1f)
+                    .setDuration(200)
+                    .start()
+            }
+
+            binding.fabEdit.apply {
+                visibility = View.VISIBLE
+                alpha = 0f
+                translationY = 0f
+                animate()
+                    .translationY(-300f - 2 * spacing)
+                    .alpha(1f)
+                    .setDuration(200)
+                    .start()
+            }
+        }
+        isSubmenuOpen = !isSubmenuOpen
+    }
+
+    private fun initGetMeal() {
         mealViewModel.getMealFromId(mealId.toInt())
         mealViewModel.meal?.observe(this) { meal ->
             if (meal != null) {
@@ -119,7 +177,9 @@ class MealActivity : AppCompatActivity() {
                     if (ingredients[i]?.isNotEmpty() == true) {
                         val measurementWithSpace = if (measurements[i]?.endsWith(" ") == true) {
                             measurements[i]
-                        } else { "${measurements[i]} " }
+                        } else {
+                            "${measurements[i]} "
+                        }
                         result.append("$measurementWithSpace${ingredients[i]}\n")
                     }
                 }
@@ -133,11 +193,16 @@ class MealActivity : AppCompatActivity() {
                 binding.ivSite.setOnClickListener {
                     meal.strSource?.let { it1 -> openLink(it1) }
                 }
-            }
-        }
 
-        binding.svHead.viewTreeObserver.addOnScrollChangedListener {
-            checkImageViewVisibility()
+                binding.fabDelete.setOnClickListener {
+                    finish()
+                    mealViewModel.deleteMeal()
+                }
+
+                binding.fabEdit.setOnClickListener {
+                    // Handle submenu2 click
+                }
+            }
         }
     }
 

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">RecipeApp</string>
     <string name="get_a_new_recipe_now">Get A New Recipe Now!</string>
+    <string name="not_sure_what_to_ncook_tonight">Not sure what to \ncook tonight?</string>
+    <string name="generate_recipe">Generate Recipe</string>
+    <string name="recipe">Recipe</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
 </resources>

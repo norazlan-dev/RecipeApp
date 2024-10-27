@@ -24,4 +24,8 @@ class MealRepository(private val mealDao: MealDao, private val apiService: ApiSe
     suspend fun insertMeal(meal: Meal) {
         mealDao.insertMeal(meal)
     }
+
+    suspend fun deleteMeal(meal: Meal) {
+        mealDao.delete(meal)
+    }
 }

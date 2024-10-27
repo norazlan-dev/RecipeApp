@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorOnBackground"
                 android:textStyle="bold"
-                android:text="Recipe"/>
+                android:text="@string/recipe"/>
 
             <TextView
                 android:id="@+id/tvIngredientsHead"
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorOnBackground"
                 android:textStyle="bold"
-                android:text="Ingredients"/>
+                android:text="@string/ingredients"/>
 
             <TextView
                 android:id="@+id/tvIngredients"
@@ -79,7 +79,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorOnBackground"
-                android:text="Ingredients"/>
+                android:text="@string/ingredients"/>
 
             <TextView
                 android:id="@+id/tvInstructionsHead"
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorOnBackground"
                 android:textStyle="bold"
-                android:text="Instructions"/>
+                android:text="@string/instructions"/>
 
             <TextView
                 android:id="@+id/tvInstructions"
@@ -105,7 +105,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorOnBackground"
-                android:text="Instructions"/>
+                android:text="@string/instructions"/>
 
             <ImageView
                 android:id="@+id/ivVideo"
@@ -146,16 +146,46 @@
         android:layout_height="wrap_content"
         android:textColor="?attr/colorOnBackground"
         android:textStyle="bold"
-        android:text="Recipe"/>
+        android:text="@string/recipe"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabEdit"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_edit_24"
-        android:contentDescription="@string/get_a_new_recipe_now"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="@dimen/dp_16"/>
+        android:gravity="bottom">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_margin="@dimen/dp_16"
+            android:id="@+id/fabMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_menu_24"
+            android:contentDescription="@string/get_a_new_recipe_now" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            app:backgroundTint="?colorError"
+            app:tint="?colorOnError"
+            android:visibility="gone"
+            android:layout_margin="@dimen/dp_16"
+            android:id="@+id/fabDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_delete_forever_24"
+            android:contentDescription="@string/get_a_new_recipe_now" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            app:backgroundTint="?colorPrimary"
+            app:tint="?colorOnPrimary"
+            android:visibility="gone"
+            android:layout_margin="@dimen/dp_16"
+            android:id="@+id/fabEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_edit_24"
+            android:contentDescription="@string/get_a_new_recipe_now" />
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

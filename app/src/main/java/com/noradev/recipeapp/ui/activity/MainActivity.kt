@@ -2,9 +2,9 @@ package com.noradev.recipeapp.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.room.Room
 import com.noradev.recipeapp.R
 import com.noradev.recipeapp.data.db.AppDatabase
 import com.noradev.recipeapp.data.model.Meal
@@ -51,26 +51,47 @@ class MainActivity : AppCompatActivity() {
             mealViewModel.getRandomMealFromServer()
         }
 
-        binding.rvList.layoutManager = GridLayoutManager(
-            applicationContext,
-            2
-        )
-
-        mealAdapter = MealAdapter(this)
-        binding.rvList.adapter = mealAdapter
-
-        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.dp_16)
-        binding.rvList.addItemDecoration(GridSpacingItemDecoration(2, spacingInPixels))
-
         binding.refresh.setOnRefreshListener {
             initNonView()
             binding.refresh.isRefreshing = false
         }
 
+        initList()
+    }
+
+    private fun initList() {
+        binding.rvList.layoutManager = GridLayoutManager(
+            applicationContext,
+            2
+        )
+
+        mealAdapter = MealAdapter()
+        binding.rvList.adapter = mealAdapter
+
         mealAdapter.setOnItemClickListener(object : MealAdapter.OnItemsClickListener {
             override fun onItemClick(mealData: Meal) {
-                startActivity(MealActivity.newIntent(this@MainActivity, mealData.idMeal.toString(), "view"))
+                startActivity(
+                    MealActivity.newIntent(
+                        this@MainActivity,
+                        mealData.idMeal.toString(),
+                        "view"
+                    )
+                )
             }
         })
+
+        binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(query: String): Boolean {
+                mealAdapter.filter.filter(query)
+                return false
+            }
+        })
+
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.dp_16)
+        binding.rvList.addItemDecoration(GridSpacingItemDecoration(2, spacingInPixels))
     }
 }

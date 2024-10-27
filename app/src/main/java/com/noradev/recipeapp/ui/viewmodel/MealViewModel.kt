@@ -22,6 +22,15 @@ class MealViewModel(private val repository: MealRepository) : ViewModel() {
         meal = repository.getMealFromId(mealId)
     }
 
+    fun deleteMeal() {
+        viewModelScope.launch {
+            meal?.value?.let {
+                repository.deleteMeal(it)
+                meal = null
+            }
+        }
+    }
+
     fun insertMeal(meal: Meal) {
         viewModelScope.launch {
             repository.insertMeal(meal)

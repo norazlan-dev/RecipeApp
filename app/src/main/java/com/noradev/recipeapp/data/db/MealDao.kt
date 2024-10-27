@@ -20,5 +20,5 @@ interface MealDao {
     suspend fun insertMeal(meal: Meal)
 
     @Delete
-    fun delete(meal: Meal)
+    suspend fun delete(meal: Meal)
 }
