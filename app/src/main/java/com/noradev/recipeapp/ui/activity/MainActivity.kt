@@ -1,6 +1,10 @@
 package com.noradev.recipeapp.ui.activity
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
@@ -48,7 +52,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         binding.btnGenerate.setOnClickListener {
-            mealViewModel.getRandomMealFromServer()
+            if (isOnline(this)) {
+                mealViewModel.getRandomMealFromServer()
+            } else {
+                Toast.makeText(this, "Internet Unavailable", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.refresh.setOnRefreshListener {
@@ -103,5 +111,22 @@ class MainActivity : AppCompatActivity() {
 
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.dp_16)
         binding.rvList.addItemDecoration(GridSpacingItemDecoration(2, spacingInPixels))
+    }
+
+    fun isOnline(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val capabilities =
+            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+        if (capabilities != null) {
+            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                return true
+            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                return true
+            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                return true
+            }
+        }
+        return false
     }
 }

@@ -186,8 +186,16 @@ class MealActivity : AppCompatActivity() {
                     meal.strYoutube?.let { it1 -> openLink(it1) }
                 }
 
+                if (meal.strYoutube.isNullOrBlank()) {
+                    binding.ivVideo.visibility = View.INVISIBLE
+                }
+
                 binding.ivSite.setOnClickListener {
                     meal.strSource?.let { it1 -> openLink(it1) }
+                }
+
+                if (meal.strSource.isNullOrBlank()) {
+                    binding.ivSite.visibility = View.INVISIBLE
                 }
 
                 binding.fabDelete.setOnClickListener {
@@ -232,7 +240,7 @@ class MealActivity : AppCompatActivity() {
     }
 
     private fun openLink(url: String) {
-        if (url.isNotEmpty()) {
+        if (url.isNotBlank()) {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
             startActivity(intent)
