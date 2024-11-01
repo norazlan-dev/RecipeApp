@@ -35,8 +35,7 @@
             app:layout_constraintBottom_toBottomOf="@id/placeholder"/>
 
         <FrameLayout
-            android:alpha=".5"
-            android:background="?colorPrimaryContainer"
+            android:background="@drawable/gradient"
             app:layout_constraintBottom_toBottomOf="@+id/tvName"
             app:layout_constraintTop_toTopOf="@+id/tvName"
             app:layout_constraintStart_toStartOf="@+id/tvName"
@@ -52,7 +51,7 @@
             android:id="@+id/tvName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="?colorOnPrimaryContainer"
+            android:textColor="@color/white"
             android:textStyle="bold"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
