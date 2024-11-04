@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
                     "add"
                 )
             )
+            /*throw RuntimeException("Test Crash")*/
         }
 
         initList()
